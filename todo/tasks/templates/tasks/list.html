@@ -5,6 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<h4> To Do</h4>
+<h2> To Do:</h2>
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ form.title }}
+    <input type="submit" value="Create Task">
+
+</form>
+{% for item in task %}
+    <div>
+        <a href="{% url 'update' item.id %}">Editar</a>
+        <a href="{% url 'delete' item.id %}">Deletar</a>
+        {% if item.complete == True%}
+            <strike>{{ item }}</strike> <br><br>
+        {% else %}
+            <span>{{ item }}</span> <br><br>
+        {% endif %}
+    </div>
+{% endfor %}
 </body>
 </html>
